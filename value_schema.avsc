@@ -1,0 +1,14 @@
+{
+   "namespace": "my.test",
+   "name": "value",
+   "type": "record",
+   "fields" : [
+     { "name" : "last_reported", "type" : "int" },
+     { "name" : "station_id", "type" : "string" },
+     { "name" : "num_ebikes_available", "type" : "int" },
+     { "name" : "num_bikes_available", "type" : "int" },
+     { "name" : "num_docks_available", "type" : "int" },
+     { "name" : "station_status", "type" : "string" },
+     { "name" : "capacity", "type" : "int" }
+   ]
+}
