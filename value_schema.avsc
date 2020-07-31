@@ -1,6 +1,6 @@
 {
-   "namespace": "my.test",
-   "name": "value",
+   "namespace": "poc.kafkastreams.alertsfiltering.entity",
+   "name": "Station",
    "type": "record",
    "fields" : [
      { "name" : "last_reported", "type" : "int" },
