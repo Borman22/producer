@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-python
+  labels:
+    app: producer-python
+    owner: alex_p
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer-python
+  template:
+    metadata:
+      labels:
+        app: producer-python
+    spec:
+      nodeSelector:
+        ROLES: worker
+      containers:
+      - name: producer-python
+        image: lordofthebikes/producer_python:latest
+        env:
+          - name:              BROKERS
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           BROKERS
+          - name:              SCHEMA_R_URL
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           SCHEMA_R_URL
+          - name:              TOPIC
+            value:             "initial_data_avro_k8s"
+                #            valueFrom:
+                #              configMapKeyRef:
+                #                name:          bike-config
+                #                key:           TOPIC
+          - name:              HDP_IP
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           HDP_IP
+          - name:              HDP_DOMAIN_NAME
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           HDP_DOMAIN_NAME
+          - name:              FORMAT
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           FORMAT
+          - name:              INTERVAL
+            valueFrom:
+              configMapKeyRef:
+                name:          bike-config
+                key:           INTERVAL

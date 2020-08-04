@@ -13,10 +13,12 @@ RUN pip3 install confluent-kafka
 RUN pip install requests
 
 
-ENV BROKERS=broker:9092
-ENV SCHEMA_REGISTRY_URL=http://schema-registry:8081
-ENV TOPIC=initial_data_avro
+ENV BROKERS=sandbox-hdp.hortonworks.com:6667
+ENV SCHEMA_R_URL=http://sandbox-hdp.hortonworks.com:7788
+ENV TOPIC=initial_data_avro_k8s
 ENV HDP_IP=10.132.0.23
-ENV HDP_DOMAIN_NAME sandbox.hortonworks.com
+ENV HDP_DOMAIN_NAME=sandbox-hdp.hortonworks.com
+ENV FORMAT=avro
+ENV INTERVAL=60
 
-CMD echo "$HDP_IP $HDP_DOMAIN_NAME" >> /etc/hosts && python -u main.py --brokers $BROKERS --schema_registry_url $SCHEMA_REGISTRY_URL --topic $TOPIC --format avro --interval 60
+CMD echo "$HDP_IP $HDP_DOMAIN_NAME" >> /etc/hosts && python -u main.py --brokers $BROKERS --schema_registry_url $SCHEMA_R_URL --topic $TOPIC --format $FORMAT --interval $INTERVAL
